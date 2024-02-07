@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  servlet:
+    context-path: / #项目的上下文路径
+spring:
+  mail:
+    host: smtp.qq.com            # SMTP服务器主机(我这里使用qq发送 所以 smtp主机就是qq)
+    port: 587                    # QQ邮箱 SMTP port号：25   （使用SSL时，port号465或587）如果使用端口为465，将protocol的smtp改为smtps
+    username: 2047600298@qq.com  # 发件人的邮箱
+    password: mxehrbbadwcrceai   # QQ邮箱的授权码(网上搜一下 qq怎么获取自己的SMTP授权码 就行 有好多攻略)
+    default-encoding: UTF-8      # 默认MimeMessage编码
+    properties: # 其他JavaMail会话属性。
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory #配饰 SSL 加密工厂
+    test-connection: true        #是否在启动时测试邮件服务器是否可用
+  ## 热部署配置
+  devtools:
+    restart:
+      enabled: true
+      # 设置重启的⽬录，添加⽬录的⽂件需要restart
+      additional-paths: src/main/java
+      # 解决项⽬⾃动重新编译后接⼝报404的问题
+      poll-interval: 3000
+      quiet-period: 1000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&useSSL=false
+    username: root
+    password: wykhnlg666
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      idle-timeout: 60000
+      maximum-pool-size: 30
+      minimum-idle: 10
+  thymeleaf:
+    cache: false
+# mybatis plus配置
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/*.xml #加载映射文件
+  type-aliases-package: com.yemage.domain #别名搜索的包
+  configuration:
+    lazy-loading-enabled: true #打开懒加载
+    aggressive-lazy-loading: false #关闭积极懒加载
+
+
+
+
